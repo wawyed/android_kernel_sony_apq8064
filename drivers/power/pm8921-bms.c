@@ -1,5 +1,5 @@
 /* Copyright (c) 2011-2012, Code Aurora Forum. All rights reserved.
- * Copyright (C) 2012 Sony Mobile Communications AB.
+ * Copyright (C) 2012-2013, Sony Mobile Communications AB.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1222,6 +1222,20 @@ static void calculate_cc_uah(struct pm8921_bms_chip *chip, int cc, int *val)
 	cc_uah = div_s64(cc_nvh, chip->r_sense);
 	*val = cc_uah;
 }
+
+int pm8921_bms_cc_uah(int *cc_uah)
+{
+	int cc;
+
+	if (!the_chip)
+		return -EINVAL;
+
+	read_cc(the_chip, &cc);
+	calculate_cc_uah(the_chip, cc, cc_uah);
+
+	return cc_uah ? 0 : -EINVAL;
+}
+EXPORT_SYMBOL(pm8921_bms_cc_uah);
 
 static int calculate_termination_uuc(struct pm8921_bms_chip *chip,
 				 int batt_temp, int chargecycles,
