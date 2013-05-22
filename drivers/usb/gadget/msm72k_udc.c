@@ -2,7 +2,7 @@
  * Driver for HighSpeed USB Client Controller in MSM7K
  *
  * Copyright (C) 2008 Google, Inc.
- * Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2009-2012, The Linux Foundation. All rights reserved.
  * Author: Mike Lockwood <lockwood@android.com>
  *         Brian Swetland <swetland@google.com>
  *
@@ -336,7 +336,7 @@ static int usb_get_max_power(struct usb_info *ui)
 		return USB_PROPRIETARY_CHG_CURRENT;
 
 	if (suspended || !configured)
-		return 0;
+		return 500;
 
 	return bmaxpow;
 }
